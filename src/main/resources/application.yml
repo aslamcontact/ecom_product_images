@@ -1,11 +1,14 @@
 spring:
   datasource:
-    password: aslam_password
-    url: jdbc:mysql://localhost:3306/my_aslam_db
-    username: aslam_mysql
+    password: ${mysql_password}
+    url: jdbc:mysql://${mysql_ip}:3306/${mysql_db}
+    username: ${mysql_user}
   jpa:
     hibernate:
       ddl-auto: create-drop
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+
+
+
