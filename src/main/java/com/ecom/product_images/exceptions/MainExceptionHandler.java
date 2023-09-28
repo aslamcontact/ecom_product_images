@@ -42,7 +42,7 @@ public class MainExceptionHandler {
     @ExceptionHandler
     public ResponseEntity<Object> imageMappeerNotExist(ImageMapperNotExistException e)
     {
-        HttpStatus httpStatus=HttpStatus.CONFLICT;
+        HttpStatus httpStatus=HttpStatus.NOT_FOUND;
         ImageMapperParser exception=new ImageMapperParser(
                 e.getMessage(),
                 httpStatus,
