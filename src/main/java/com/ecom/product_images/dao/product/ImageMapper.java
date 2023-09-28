@@ -3,6 +3,7 @@ package com.ecom.product_images.dao.product;
 import com.ecom.product_images.dao.images.ProductImage;
 import jakarta.persistence.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Entity
@@ -15,7 +16,9 @@ public class ImageMapper {
 
     public ImageMapper() {
     }
-
+    public ImageMapper(String productImagesId) {
+        this.productImagesId=productImagesId;
+    }
     public ImageMapper(String productImagesId, Map<String, ProductImage> images) {
         this.productImagesId = productImagesId;
         this.images = images;
