@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping
-public interface ProductImageMapperRepo extends JpaRepository<ProductImageMapper,String> {
+public interface ImageMapperRepository extends JpaRepository<ImageMapper,String> {
 }

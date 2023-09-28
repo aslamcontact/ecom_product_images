@@ -3,21 +3,20 @@ package com.ecom.product_images.dao.product;
 import com.ecom.product_images.dao.images.ProductImage;
 import jakarta.persistence.*;
 
-import java.util.List;
 import java.util.Map;
 
 @Entity
-public class ProductImageMapper {
+public class ImageMapper {
     @Id
     private String productImagesId;
     @ElementCollection
     Map<String,ProductImage> images;
 
 
-    public ProductImageMapper() {
+    public ImageMapper() {
     }
 
-    public ProductImageMapper(String productImagesId, Map<String, ProductImage> images) {
+    public ImageMapper(String productImagesId, Map<String, ProductImage> images) {
         this.productImagesId = productImagesId;
         this.images = images;
     }

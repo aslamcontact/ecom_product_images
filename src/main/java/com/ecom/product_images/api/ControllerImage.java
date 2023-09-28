@@ -13,20 +13,20 @@ import java.io.IOException;
 public class ControllerImage {
     @Autowired
         ProductImageService productImageService;
-    @PostMapping("/product/mapper")
+    @PostMapping("/product")
     public String createImageMapper(@RequestParam String product)
     {
 
         return productImageService.createImageMapper(product);
     }
-    @PostMapping("/product/mapper/image")
+    @PostMapping("/product/image")
     public String addImageToMapper(@RequestParam String product,
                                    @RequestParam String category,
                                    @RequestBody MultipartFile image
                                    ) throws IOException {
         return productImageService.addImageToMapper(product,category,image.getBytes());
     }
-    @GetMapping( value = "/product/mapper/image",
+    @GetMapping( value = "/product/image",
                  produces = MediaType.IMAGE_JPEG_VALUE
                 )
     public byte[] getImage(@RequestParam String product,
