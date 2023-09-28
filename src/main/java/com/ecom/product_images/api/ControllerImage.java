@@ -16,8 +16,8 @@ import java.io.IOException;
 public class ControllerImage {
     @Autowired
         ProductImageService productImageService;
-    @PostMapping("/product")
-    public ResponseEntity<String> createImageMapper(@RequestParam String id)
+    @PostMapping("/product/image/mapper/{id}")
+    public ResponseEntity<String> createImageMapper(@PathVariable("id") String id)
     {
 
         String createdId = productImageService.createImageMapper(id);
@@ -26,10 +26,10 @@ public class ControllerImage {
                                      HttpStatus.CREATED
                                    );
     }
-    @PostMapping("/product/image")
+    @PostMapping("/product/image/mapper/{id}/{category}")
     public ResponseEntity<String> addImageToMapper(
-                                   @RequestParam String id,
-                                   @RequestParam String category,
+                                   @PathVariable("id") String id,
+                                   @PathVariable("category") String category,
                                    @RequestBody MultipartFile image
                                    ) throws IOException {
        String imageName= productImageService.addImageToMapper(
@@ -40,11 +40,11 @@ public class ControllerImage {
 
        return new ResponseEntity<>(imageName,HttpStatus.CREATED);
     }
-    @GetMapping( value = "/product/image",
+    @GetMapping( value = "/product/image/mapper/{id}/{category}",
                  produces = MediaType.IMAGE_JPEG_VALUE
                 )
-    public byte[] getImage(@RequestParam String id,
-                           @RequestParam String category)
+    public byte[] getImage(@PathVariable("id") String id,
+                           @PathVariable("category") String category)
     {
 
       return productImageService.getImage(id,category);
