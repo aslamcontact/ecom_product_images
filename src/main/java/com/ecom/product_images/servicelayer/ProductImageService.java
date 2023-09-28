@@ -7,6 +7,7 @@ import com.ecom.product_images.dao.product.ImageMapperRepository;
 import com.ecom.product_images.exceptions.ImageMapper.ImageMapperExistException;
 import com.ecom.product_images.exceptions.ImageMapper.ImageMapperNotExistException;
 import com.ecom.product_images.exceptions.productImage.ProductImageExistException;
+import com.ecom.product_images.exceptions.productImage.ProductImageNotExistException;
 import jdk.dynalink.linker.LinkerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,18 +79,43 @@ public class ProductImageService {
        return categoryName;
     }
 
-    public byte[] getImage(
+    public byte[] getImageFromMapper(
                      String id,
                      String category
                     )
     {
-        Optional<ImageMapper> result;
-        result= imageMapperRepository.findById(id);
-        if(result.isEmpty())
+        boolean checkCategoty=false;
+        Optional<ImageMapper> mapper;
+        mapper= imageMapperRepository.findById(id);
+        if(mapper.isEmpty())
             throw new ImageMapperNotExistException(id);
-        return result.get().getImages().get(category).getImage();
-    }
+        checkCategoty=mapper.get().getImages().containsKey(category);
+        if(!checkCategoty)
+            throw new ProductImageNotExistException(id,category);
 
+        return mapper.get().getImages().get(category).getImage();
+    }
+   public String removeImageFromMapper(
+                                        String id,
+                                        String category
+                                      )
+   {
+       boolean checkCategoty=false;
+       Optional<ImageMapper> mapper;
+
+       mapper=imageMapperRepository.findById(id);
+       if (mapper.isEmpty()) throw  new ImageMapperNotExistException(id);
+
+       checkCategoty=mapper.get().getImages().containsKey(category);
+       if(!checkCategoty)
+           throw new ProductImageNotExistException(id,category);
+
+
+       mapper.get().getImages().remove(category);
+       imageMapperRepository.save(mapper.get());
+
+           return category;
+   }
 
 
 }

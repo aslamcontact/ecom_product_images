@@ -4,6 +4,7 @@ import com.ecom.product_images.exceptions.ImageMapper.ImageMapperParser;
 import com.ecom.product_images.exceptions.ImageMapper.ImageMapperExistException;
 import com.ecom.product_images.exceptions.ImageMapper.ImageMapperNotExistException;
 import com.ecom.product_images.exceptions.productImage.ProductImageExistException;
+import com.ecom.product_images.exceptions.productImage.ProductImageNotExistException;
 import com.ecom.product_images.exceptions.productImage.ProductImageParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,19 @@ public class MainExceptionHandler {
                );
          return new ResponseEntity<>(parser,httpStatus);
      }
+
+    @ExceptionHandler
+    public ResponseEntity<Object> productImageNotExist(ProductImageNotExistException exception)
+    {
+        HttpStatus httpStatus=HttpStatus.NOT_FOUND;
+        ProductImageParser parser=new ProductImageParser(
+                exception.getMessage(),
+                httpStatus,
+                exception.getId(),
+                exception.getCategory()
+        );
+        return new ResponseEntity<>(parser,httpStatus);
+    }
 
     @ExceptionHandler
     public ResponseEntity<Object> imageMappeerExist(ImageMapperExistException e)

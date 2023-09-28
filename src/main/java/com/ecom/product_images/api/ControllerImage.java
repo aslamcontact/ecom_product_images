@@ -4,6 +4,7 @@ import com.ecom.product_images.dao.product.ImageMapper;
 import com.ecom.product_images.servicelayer.ProductImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.graphql.ConditionalOnGraphQlSchema;
+import org.springframework.boot.web.embedded.netty.NettyWebServer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -69,10 +70,21 @@ public class ControllerImage {
     @GetMapping( value = "/product/image/mapper/{id}/{category}",
                  produces = MediaType.IMAGE_JPEG_VALUE
                 )
-    public byte[] getImage(@PathVariable("id") String id,
+    public ResponseEntity<byte[]> getImageFromMapper(@PathVariable("id") String id,
                            @PathVariable("category") String category)
     {
 
-      return productImageService.getImage(id,category);
+      byte[] image=productImageService.getImageFromMapper(id,category);
+      return new ResponseEntity<>(image,HttpStatus.FOUND);
+    }
+    @DeleteMapping("/product/image/mapper/{id}/{category}")
+    public ResponseEntity<String> removeImageFromMapper(
+            @PathVariable("id") String id,
+            @PathVariable("category") String category
+    )
+    {
+
+           productImageService.removeImageFromMapper(id,category);
+        return new ResponseEntity<>(category,HttpStatus.OK);
     }
 }
