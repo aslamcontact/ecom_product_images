@@ -53,7 +53,8 @@ public class ControllerImage {
 
 
 
-    @PostMapping("/product/image/mapper/{id}/{category}")
+    @PostMapping(value = "/product/image/mapper/{id}/{category}",
+                 consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> addImageToMapper(
                                    @PathVariable("id") String id,
                                    @PathVariable("category") String category,
@@ -77,7 +78,10 @@ public class ControllerImage {
       byte[] image=productImageService.getImageFromMapper(id,category);
       return new ResponseEntity<>(image,HttpStatus.FOUND);
     }
-    @PutMapping("/product/image/mapper/{id}/{category}")
+    @PutMapping(
+                 value = "/product/image/mapper/{id}/{category}",
+                 consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+                )
     public ResponseEntity<String> updateImageToMapper(
             @PathVariable("id") String id,
             @PathVariable("category") String category,
