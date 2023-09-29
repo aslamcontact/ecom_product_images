@@ -116,6 +116,27 @@ public class ProductImageService {
 
            return category;
    }
+public String updateImageFromMapper(
+                                      String id,
+                                      String category,
+                                      byte[] imageByte
+                                   )
+{
 
+    boolean checkCategoty=false;
+    Optional<ImageMapper> mapper;
 
+    mapper=imageMapperRepository.findById(id);
+    if (mapper.isEmpty()) throw  new ImageMapperNotExistException(id);
+
+    checkCategoty=mapper.get().getImages().containsKey(category);
+    if(!checkCategoty)
+        throw new ProductImageNotExistException(id,category);
+
+    mapper.get().getImages().put(category,new ProductImage(imageByte));
+
+    imageMapperRepository.save(mapper.get());
+    return category;
+
+}
 }

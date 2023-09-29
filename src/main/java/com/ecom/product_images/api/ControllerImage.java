@@ -77,6 +77,21 @@ public class ControllerImage {
       byte[] image=productImageService.getImageFromMapper(id,category);
       return new ResponseEntity<>(image,HttpStatus.FOUND);
     }
+    @PutMapping("/product/image/mapper/{id}/{category}")
+    public ResponseEntity<String> updateImageToMapper(
+            @PathVariable("id") String id,
+            @PathVariable("category") String category,
+            @RequestBody MultipartFile image
+    ) throws IOException {
+        String imageName= productImageService.updateImageFromMapper(
+                id,
+                category,
+                image.getBytes()
+        );
+
+        return new ResponseEntity<>(imageName,HttpStatus.CREATED);
+    }
+
     @DeleteMapping("/product/image/mapper/{id}/{category}")
     public ResponseEntity<String> removeImageFromMapper(
             @PathVariable("id") String id,
