@@ -2,7 +2,7 @@ spring:
   datasource:
 
     password: ${mysql_password}
-    url: jdbc:mysql://${mysql_user}@${mysql_ip}:3306/${mysql_db}?enabledTLSProtocols=TLSv1.2
+    url: jdbc:mysql://${mysql_user}@${mysql_ip}:3306/${mysql_db}
 
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
