@@ -5,7 +5,7 @@ spring:
        maximumPoolSize: 10
        idleTimeout: 120000
        connectionTimeout: 300000
-       maxLifetime: 2000000
+       maxLifetime: 3000000
        leakDetectionThreshold: 300000
     username: ${mysql_user}
     password: ${mysql_password}
@@ -13,7 +13,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
