@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   mysql:
-     image: mysql
+     image: ubuntu/mysql:latest
      restart: always
      environment:
        MYSQL_DATABASE: 'aslam_db'
@@ -13,7 +13,7 @@ services:
        MYSQL_ROOT_PASSWORD: 'aslam_root_password'
      networks:
        images_net:
-         ipv4_address: 10.1.0.3
+         ipv4_address: 10.2.0.3
 
      expose:
        # Opens port 3306 on the container
@@ -25,5 +25,5 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 10.1.0.0/16
-          gateway: 10.1.0.1
+        - subnet: 10.2.0.0/16
+          gateway: 10.2.0.1
