@@ -11,10 +11,13 @@ services:
       MYSQL_PASSWORD: ${db_password}
       # Password for root access
       MYSQL_ROOT_PASSWORD: ${db_root_password}
+      #mount dirctory mysql conf to access any ip from other container
+    volumes:
+      - './mysql_conf:/etc/mysql/conf.d'
 
     networks:
       images_net:
-        ipv4_address: 10.1.0.3
+        ipv4_address: 10.2.0.3
 
     expose:
       - '3306'
@@ -28,11 +31,11 @@ services:
       mysql_user: ${db_user}
       mysql_password: ${db_password}
       mysql_db: ${db_name}
-      mysql_ip: 10.1.0.3
+      mysql_ip: 10.2.0.3
     expose:
       - '3306'
     ports:
-      - "8085:8080"
+      - "8086:8080"
     networks:
       images_net:
         ipv4_address: 10.1.0.4
