@@ -38,7 +38,7 @@ public class ControllerImage {
     {
          return new ResponseEntity<>(
                                       productImageService.getImagesImageMapper(id),
-                                      HttpStatus.FOUND
+                                      HttpStatus.OK
                                     );
     }
     @DeleteMapping("/product/image/mapper/{id}")
