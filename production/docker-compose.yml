@@ -38,12 +38,12 @@ services:
       - "8089:8080"
     networks:
       images_net:
-        ipv4_address: 10.1.0.4
+        ipv4_address: 10.2.0.4
 
 networks:
   images_net:
     driver: bridge
     ipam:
       config:
-        - subnet: 10.1.0.0/24
-          gateway: 10.1.0.1
+        - subnet: 10.2.0.0/24
+          gateway: 10.2.0.1

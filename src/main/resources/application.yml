@@ -5,6 +5,7 @@ spring:
        maximumPoolSize: 10
        idleTimeout: 120000
        connectionTimeout: 300000
+       maxLifetime: 2000000
        leakDetectionThreshold: 300000
     username: ${mysql_user}
     password: ${mysql_password}
