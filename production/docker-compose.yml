@@ -3,6 +3,8 @@ services:
   mysql:
     image: ubuntu/mysql:latest
     restart: always
+    cap_add:
+      - SYS_NICE
     environment:
       MYSQL_DATABASE: ${db_name}
       # So you don't have to use root, but you can if you like
